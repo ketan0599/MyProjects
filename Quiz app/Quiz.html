@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quiz</title>
+	<style type="text/css">
+		@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap');
+		body{
+			font-family: 'Noto Sans JP', sans-serif;
+			background-color: #f8f6f0;
+			text-align: center;
+			color: #333;
+		}
+		h1{
+			background-color: #444;
+			color: #fff;
+		}
+		ul{
+			list-style: none;
+		}
+		li{
+			list-style: none;
+			margin: 0 auto;
+			width: 75%;
+			font-size: 2em;
+			text-align: left;
+		}
+		input[type=radio] {
+		    border: 0px;
+		    width: 20px;
+		    height: 2em;
+		}
+		.question{
+			font-size: 2em;
+		    width: 70%;
+		    height: auto;
+		    margin: 0 auto;
+		    border-radius: 6px;
+		}
+		.quizmessage {
+		    background-color: peachpuff;
+		    border-radius: 6px;
+		    width: 30%;
+		    margin: auto;
+		    text-align: center;
+		    padding: 2px;
+		    color: red;
+		}
+		.flex{
+			margin: 0 auto;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+		}
+		button{
+			font-size: 22px;
+			background-color: #279;
+			color: #fff;
+			border: 0px;
+			border-radius: 3px;
+			padding: 20px;
+			cursor: pointer;
+			margin-bottom: 20px;
+		}
+		button:hover{
+			background-color: #38a;
+		}
+		.result{
+			display: none;
+			font-size: 3em;
+			margin: 0 auto;
+			background-color: peachpuff;
+			font-weight: bold;
+		}
+		#progressbar{
+			width: 75%;
+			margin: 0 auto;
+			border-radius: 20px;
+		}
+		.ui-widget-header{
+			background: #cedc98  !important;
+            border: 1px solid #DDDDDD !important;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1> This Quiz is created by Ketan Chalana </h1>
+		<div id="progressbar"></div>
+		<div class="question"></div>
+		<div class="choicelist"></div>
+		<div class="quizmessage">Please Select An Answer First</div>
+		<div class="flex">
+			<button class="previousButton"> Previous Question </button>
+			<button class="nextButton"> Next Question </button>
+		</div>
+		<div class="result" id="result"></div>
+	</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script type="text/javascript">
+	let questions = [{
+	    question: "Q.1. Grand Central Terminal, Park Avenue, New York is the world's ?",
+	    choices: ["largest railway station", "highest railway station", "longest railway station", "None of the above"],
+	    correctAnswer: 0
+	}, {
+	    question: "Q.2 Entomology is the science that studies?",
+	    choices: ["Behavior of human beings", "Insects", "The origin and history of technical and scientific terms", "The formation of rocks"],
+	    correctAnswer: 1
+	}, {
+	    question: "Q.3 Eritrea, which became the 182nd member of the UN in 1993, is in the continent of?",
+	    choices: ["Asia", "Africa", "Europe", "Australia"],
+	    correctAnswer: 1
+	}, {
+	    question: "Q.4 Garampani sanctuary is located at?",
+	    choices: ["Junagarh, Gujarat", "Diphu, Assam", "Kohima, Nagaland", "Gangtok, Sikkim"],
+	    correctAnswer: 1
+	}, {
+	    question: "Q.5 For which of the following disciplines is Nobel Prize awarded??",
+	    choices: ["Physics and Chemistry", "Physiology or Medicine", "Literature, Peace and Economics", "All of the above"],
+	    correctAnswer: 3
+	}, {
+	    question: "Q.6 Eritrea, which became the 182nd member of the UN in 1993, is in the continent of?",
+	    choices: ["Asia", "Africa", "Europe", "Australia"],
+	    correctAnswer: 1
+	}, {
+	    question: "Q.7 Eritrea, which became the 182nd member of the UN in 1993, is in the continent of?",
+	    choices: ["Asia", "Africa", "Europe", "Australia"],
+	    correctAnswer: 1
+	}, {
+	    question: "Q.8 Eritrea, which became the 182nd member of the UN in 1993, is in the continent of?",
+	    choices: ["Asia", "Africa", "Europe", "Australia"],
+	    correctAnswer: 1
+	}, {
+	    question: "Q.9 Eritrea, which became the 182nd member of the UN in 1993, is in the continent of?",
+	    choices: ["Asia", "Africa", "Europe", "Australia"],
+	    correctAnswer: 1
+	}, {
+	    question: "Q.10 Eritrea, which became the 182nd member of the UN in 1993, is in the continent of?",
+	    choices: ["Asia", "Africa", "Europe", "Australia"],
+	    correctAnswer: 1
+	}, {
+	    question: "Q.11 Eritrea, which became the 182nd member of the UN in 1993, is in the continent of?",
+	    choices: ["Asia", "Africa", "Europe", "Australia"],
+	    correctAnswer: 1
+	}, {
+	    question: "Q.12 Eritrea, which became the 182nd member of the UN in 1993, is in the continent of?",
+	    choices: ["Asia", "Africa", "Europe", "Australia"],
+	    correctAnswer: 1
+	}, {
+	    question: "Q.13 Eritrea, which became the 182nd member of the UN in 1993, is in the continent of?",
+	    choices: ["Asia", "Africa", "Europe", "Australia"],
+	    correctAnswer: 1
+	}, {
+	    question: "Q.14 Eritrea, which became the 182nd member of the UN in 1993, is in the continent of?",
+	    choices: ["Asia", "Africa", "Europe", "Australia"],
+	    correctAnswer: 1
+	}, {
+	    question: "Q.15 Eritrea, which became the 182nd member of the UN in 1993, is in the continent of?",
+	    choices: ["Asia", "Africa", "Europe", "Australia"],
+	    correctAnswer: 1
+	}, {
+	    question: "Q.16 Eritrea, which became the 182nd member of the UN in 1993, is in the continent of?",
+	    choices: ["Asia", "Africa", "Europe", "Australia"],
+	    correctAnswer: 1
+	}, {
+	    question: "Q.17 Eritrea, which became the 182nd member of the UN in 1993, is in the continent of?",
+	    choices: ["Asia", "Africa", "Europe", "Australia"],
+	    correctAnswer: 1
+	}, {
+	    question: "Q.18 Eritrea, which became the 182nd member of the UN in 1993, is in the continent of?",
+	    choices: ["Asia", "Africa", "Europe", "Australia"],
+	    correctAnswer: 1
+	}, {
+	    question: "Q.19 Eritrea, which became the 182nd member of the UN in 1993, is in the continent of?",
+	    choices: ["Asia", "Africa", "Europe", "Australia"],
+	    correctAnswer: 1
+	}, {
+	    question: "Q.20 Eritrea, which became the 182nd member of the UN in 1993, is in the continent of?",
+	    choices: ["Asia", "Africa", "Europe", "Australia"],
+	    correctAnswer: 1
+	}, {
+	    question: "Q.21 Eritrea, which became the 182nd member of the UN in 1993, is in the continent of?",
+	    choices: ["Asia", "Africa", "Europe", "Australia"],
+	    correctAnswer: 1
+	}, {
+	    question: "Q.22 Eritrea, which became the 182nd member of the UN in 1993, is in the continent of?",
+	    choices: ["Asia", "Africa", "Europe", "Australia"],
+	    correctAnswer: 1
+	}, {
+	    question: "Q.23 Eritrea, which became the 182nd member of the UN in 1993, is in the continent of?",
+	    choices: ["Asia", "Africa", "Europe", "Australia"],
+	    correctAnswer: 1
+	}, {
+	    question: "Q.24 Eritrea, which became the 182nd member of the UN in 1993, is in the continent of?",
+	    choices: ["Asia", "Africa", "Europe", "Australia"],
+	    correctAnswer: 1
+	}, {
+	    question: "Q.25 Eritrea, which became the 182nd member of the UN in 1993, is in the continent of?",
+	    choices: ["Asia", "Africa", "Europe", "Australia"],
+	    correctAnswer: 1
+	}];
+
+	let currentQuestion = 0;
+	let correctAnswers  = 0;
+	let answered=0;
+	let quizOver = false;
+	let value;
+	if(localStorage.getItem("currentQuestion") != null){
+		currentQuestion = localStorage.getItem("currentQuestion");
+		if(currentQuestion == questions.length)
+			resetQuiz();
+	}
+	else{
+		currentQuestion=0;
+	}
+	if(localStorage.getItem("answered") != null){
+		currentQuestion = localStorage.getItem("answered");
+	}
+	else{
+		currentQuestion=0;
+	}
+
+	$(document).ready(function () {
+
+	    displayCurrentQuestion();
+	    $(this).find(".quizmessage").hide();
+
+	    $(this).find(".nextButton").on("click", function () {
+	    	if(answered <= currentQuestion){
+	    		answered++;
+	    		localStorage.setItem("answered",answered);
+    		}
+	        if (!quizOver) {
+	            value = $("input[type='radio']:checked").val();
+
+	            if (value == undefined) {
+	                $(document).find(".quizmessage").show();
+	            } else {
+
+	                $(document).find(".quizmessage").hide();
+
+	                localStorage.setItem(currentQuestion, value);
+
+	                currentQuestion++; 
+	                localStorage.setItem("currentQuestion",currentQuestion);
+                    if(currentQuestion == questions.length-1){
+						$(document).find(".nextButton").text("Submit");
+					}
+					else{
+						$(document).find(".nextButton").text("Next Question");
+					}
+	                if (currentQuestion < questions.length) {
+	                    displayCurrentQuestion();
+	                } else {
+	                    displayScore();
+	                    $(document).find(".nextButton").text("Play Again?");
+	                    $(document).find(".previousButton").hide();
+	                    quizOver = true;
+	                }
+	            }
+	        } else {
+	            quizOver = false;
+	            $(document).find(".nextButton").text("Next Question");
+	            resetQuiz();
+	            displayCurrentQuestion();
+	            hideScore();
+	        }
+	    });
+
+	     $(this).find(".previousButton").on("click", function () {
+	     	currentQuestion--;
+	     	displayCurrentQuestion();
+	    });
+
+	});
+
+    function displayCurrentQuestion() {
+    	$(function() {
+            $( "#progressbar" ).progressbar({
+               value: (localStorage.getItem("answered")/questions.length)*100
+            });
+        });
+	    if(currentQuestion>0){
+	    	$(document).find(".previousButton").show();
+	    }
+	    else{
+	    	$(document).find(".previousButton").hide();
+	    }
+	    let question = questions[currentQuestion].question;
+	    let questionClass = $(document).find(".container > .question");
+	    let choiceList = $(document).find(".container > .choicelist");
+	    let numChoices = questions[currentQuestion].choices.length;
+	    $(questionClass).text(question);
+	    $(choiceList).find("li").remove();
+	    let choice;
+	    for (i = 0; i < numChoices; i++) {
+	    	choice = questions[currentQuestion].choices[i];
+	    	if(localStorage.getItem(currentQuestion)==i){
+	    		$('<li><input type="radio" value=' + i + ' name="dynradio" checked />' + choice + '</li>').appendTo(choiceList);
+	    			continue;
+	    	}
+	        $('<li><input type="radio" value=' + i + ' name="dynradio" />' + choice + '</li>').appendTo(choiceList);
+	    }
+	}
+
+	function resetQuiz() {
+	    currentQuestion = 0;
+	    correctAnswers = 0;
+	    hideScore();
+	    for(let i=0;i<questions.length;i++){
+	    	localStorage.removeItem(i);
+	    }
+	    localStorage.removeItem("currentQuestion");
+	    localStorage.removeItem("answered");
+	    answered=0;
+	}
+
+	function displayScore() {
+		$(function() {
+            $( "#progressbar" ).progressbar({
+               value: (localStorage.getItem("answered")/questions.length)*100
+            });
+        });
+		for(let i=0;i<questions.length;i++){
+			if (localStorage.getItem(i) == questions[i].correctAnswer) {
+                    correctAnswers++;
+                }
+		}
+		let score= (correctAnswers/questions.length)*100;
+		if(score<36){
+			$(document).find(".container > .result").text("Fail");
+			document.getElementById("result").style.color="red";
+			//$("#result").CSS("color","red");
+		}
+		else if(score < 50 && score >= 36){
+			$(document).find(".container > .result").text("Average");
+			document.getElementById("result").style.color="#ffa500";
+			//$("#result").CSS("color","red");
+		}
+		else if(score < 70 && score >= 50){
+			$(document).find(".container > .result").text("Good");
+			document.getElementById("result").style.color="#008000";
+			//$("#result").CSS("color","red");
+		}
+		else if(score < 90 && score >= 70){
+			$(document).find(".container > .result").text("Very Good");
+			document.getElementById("result").style.color="#004d00";
+			//$("#result").CSS("color","red");
+		}
+		else{
+			$(document).find(".container > .result").text("Excellent");
+			document.getElementById("result").style.color="#FFD700";
+			//$("#result").CSS("color","red");
+		}
+	    $(document).find(".container > .result").show();
+	}
+
+	function hideScore() {
+	    $(document).find(".result").hide();
+	}
+</script>
+</html>
