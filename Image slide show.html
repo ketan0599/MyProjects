@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Image Slider</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <style type="text/css">
+            .slider img{
+                display: none;
+            }
+            
+            .slider img.active{
+                display: block;
+                border: 2px solid Black;
+                width: 50%;
+            }
+        </style>
+    </head>
+    <body>
+            <div class="mt-4 slider d-flex justify-content-center">
+                <img src="Images/image1.jpg" class="active">
+                <img src="Images/image2.jpg">
+                <img src="Images/image3.jpg">
+                <img src="Images/image4.jpg">
+            </div>
+            <div class="m-2 d-flex justify-content-center">
+                <button id="pre" onclick="changeSlide('pre')" class="m-3 btn btn-dark">Previous</button>
+                <button id="slideshow" onclick="slideshow()" class="m-3 btn btn-success">Play</button>
+                <button id="next" onclick="changeSlide('next')" class="m-3 btn btn-dark">Next</button>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            let stopSlideshow = false;
+            function slideshow(){
+                let status = document.getElementById("slideshow").innerHTML;
+                if(status == "Play"){
+                    stopSlideshow = false;
+                    document.getElementById("slideshow").innerHTML = "Pause";
+                    document.getElementById("slideshow").className = "m-3 btn btn-danger";
+                }
+                else{
+                    stopSlideshow=true;
+                    document.getElementById("slideshow").innerHTML = "Play";
+                    document.getElementById("slideshow").className = "m-3 btn btn-success";
+                }
+                let interval = setInterval(function(){
+                    if(!stopSlideshow){
+                        changeSlide("next");
+                    }
+                    else{
+                        clearInterval(interval);
+                    }
+                } , 2000);
+            }
+            
+            function changeSlide(dir){
+                let currentImg = $("img.active");
+                let nextImg = currentImg.next();
+                let previousImg = currentImg.prev();
+                
+                if(dir == "next"){
+                    if(nextImg.length){
+                        nextImg.addClass("active");
+                    }
+                    else{
+                        $(".slider img").first().addClass("active");
+                    }
+                }
+                else{
+                    if(previousImg.length){
+                        previousImg.addClass("active");
+                    }
+                    else{
+                        $(".slider img").last().addClass("active");
+                    }
+                }
+                currentImg.removeClass("active");
+            }
+        </script>
+    </body>
+</html>
